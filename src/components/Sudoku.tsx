@@ -4,22 +4,23 @@ import CSS from "csstype";
 
 type Props = {
   index: number;
+  data: Array<Array<number | string>>;
 };
-const Sudoku: React.FC<Props> = ({ index }) => {
+const Sudoku: React.FC<Props> = ({ index, data }) => {
   const TOP_LEFT = [0, 3, 6];
   const BTM_RIGHT = [2, 5, 8];
   let mar: CSS.Property.Margin<string | number> = "10px";
-  const data = [
-    [1, 7, 5, 4, 2, 6, 9, 8, 3],
-    [6, 4, 2, 9, 3, 8, 5, 1, 7],
-    [9, 8, 3, 1, 5, 7, 6, 4, 2],
-    [7, 6, 8, 5, 1, 3, 4, 2, 9],
-    [3, 2, 9, 6, 8, 4, 7, 5, 1],
-    [4, 5, 1, 7, 9, 2, 3, 6, 8],
-    [2, 3, 7, 8, 6, 5, 1, 9, 4],
-    [5, 9, 4, 2, 7, 1, 8, 3, 6],
-    [8, 1, 6, 3, 4, 9, 2, 7, 5],
-  ];
+  // const data = [
+  //   [1, 7, 5, 4, 2, 6, 9, 8, 3],
+  //   [6, 4, 2, 9, 3, 8, 5, 1, 7],
+  //   [9, 8, 3, 1, 5, 7, 6, 4, 2],
+  //   [7, 6, 8, 5, 1, 3, 4, 2, 9],
+  //   [3, 2, 9, 6, 8, 4, 7, 5, 1],
+  //   [4, 5, 1, 7, 9, 2, 3, 6, 8],
+  //   [2, 3, 7, 8, 6, 5, 1, 9, 4],
+  //   [5, 9, 4, 2, 7, 1, 8, 3, 6],
+  //   [8, 1, 6, 3, 4, 9, 2, 7, 5],
+  // ];
   let modIndex = index % 6;
   switch (modIndex) {
     case 1:
@@ -57,11 +58,9 @@ const Sudoku: React.FC<Props> = ({ index }) => {
                   borderRightWidth: right,
                   borderBottomWidth: btm,
                   borderLeftWidth: left,
-                  // margin: mar,
                 }}
               >
                 {column}
-                {/* <p>{column}</p> */}
               </div>
             );
           });
