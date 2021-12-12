@@ -5,8 +5,14 @@ import CSS from 'csstype';
 type Props = {
   index: number;
   data: Array<Array<number | string>>;
+  type: string;
 };
-const Sudoku: React.FC<Props> = ({ index, data }) => {
+const Sudoku: React.FC<Props> = ({ index, data, type }) => {
+  const QUES = 'Question';
+  const ANS = 'Answer';
+  const primaryColor = type == QUES ? 'black' : 'gray';
+  const secondaryColor = type == QUES ? 'gray' : 'black';
+
   const TOP_LEFT = [0, 3, 6];
   const BTM_RIGHT = [2, 5, 8];
   let mar: CSS.Property.Margin<string | number> = '10px';
@@ -37,7 +43,16 @@ const Sudoku: React.FC<Props> = ({ index, data }) => {
 
   return (
     <div className='flex'>
-      {index}
+      <span
+        className='index'
+        style={{
+          background: primaryColor,
+          padding: index < 10 ? '2px' : '1px',
+        }}
+      >
+        {index}
+      </span>
+
       <div
         className='sudoku-container'
         style={{
@@ -66,13 +81,15 @@ const Sudoku: React.FC<Props> = ({ index, data }) => {
                   borderRightWidth: right,
                   borderBottomWidth: btm,
                   borderLeftWidth: left,
-                  borderLeftColor: left == '3px' ? 'black' : 'gray',
-                  borderRightColor: right == '3px' ? 'black' : 'gray',
+                  borderLeftColor:
+                    left == '3px' ? primaryColor : secondaryColor,
+                  borderRightColor:
+                    right == '3px' ? primaryColor : secondaryColor,
 
-                  borderTopColor: top == '3px' ? 'black' : 'gray',
+                  borderTopColor: top == '3px' ? primaryColor : secondaryColor,
 
-                  borderBottomColor: btm == '3px' ? 'black' : 'gray',
-
+                  borderBottomColor:
+                    btm == '3px' ? primaryColor : secondaryColor,
                   fontSize: 20,
                 }}
               >

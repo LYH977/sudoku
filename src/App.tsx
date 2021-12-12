@@ -8,7 +8,12 @@ import ReactToPrint from 'react-to-print';
 
 function App() {
   const inputRef = useRef<any>(null);
+  const QUES: string = 'Question';
+  const ANS: string = 'Answer';
 
+  const type = ANS;
+
+  const selectedSudoku = type === QUES ? ques : ans;
   return (
     <div className='App'>
       <ReactToPrint
@@ -17,10 +22,14 @@ function App() {
       />
 
       <div className='sudoku-collection' ref={inputRef}>
-        {ans.map((datum: Array<Array<number | string>>, index: number) => {
-          return <Sudoku index={index + 1} data={datum} key={index} />;
-          //
-        })}
+        {selectedSudoku.map(
+          (datum: Array<Array<number | string>>, index: number) => {
+            return (
+              <Sudoku index={index + 1} data={datum} key={index} type={type} />
+            );
+            //
+          }
+        )}
       </div>
     </div>
   );
